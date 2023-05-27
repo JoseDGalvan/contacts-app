@@ -7,6 +7,7 @@ use App\Http\Controllers\EditController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UpdateController;
 use App\Http\Controllers\ValidateController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
@@ -28,6 +29,11 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
 Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');;
 Route::get('/contacts/create', [CreateController::class, 'create'])->name('contacts.create');
 Route::post('/contacts', [ValidateController::class, 'store'])->name('contacts.store');
@@ -36,6 +42,3 @@ Route::put('/contacts/{contacts}', [UpdateController::class, 'update'])->name('c
 Route::delete('/contacts/{contacts}', [DeleteController::class, 'destroy'])->name('contacts.destroy');
 
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
