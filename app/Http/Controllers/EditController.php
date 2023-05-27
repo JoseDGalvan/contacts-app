@@ -7,9 +7,10 @@ use Illuminate\Http\Request;
 
 class EditController extends Controller
 {
-    public function edit(Contact $contact)
+
+    public function edit($id)
     {
+        $contact = Contact::findOrFail($id);
         return view('contacts.edit', compact('contact'));
     }
-
 }

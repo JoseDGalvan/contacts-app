@@ -12,12 +12,13 @@ class ValidateController extends Controller
     {
         $validatedData = $request->validate([
             'identification' => 'required|string|max:20',
-            'names' => 'required|string|max:40',
+            'names' => 'nullable|string|max:40',
             'last_names' => 'required|string|max:40',
             'date_birth' => 'required|date',
             'phone' => 'required|string|max:20',
             'address' => 'required|string|max:255',
         ]);
+
 
         Contact::create($validatedData);
 

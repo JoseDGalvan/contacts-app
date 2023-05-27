@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -27,10 +28,14 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
+Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');;
+Route::get('/contacts/create', [CreateController::class, 'create'])->name('contacts.create');
+Route::post('/contacts', [ValidateController::class, 'store'])->name('contacts.store');
+Route::get('/contacts/{id}/edit', [EditController::class, 'edit'])->name('contacts.edit');
+Route::put('/contacts/{contacts}', [UpdateController::class, 'update'])->name('contacts.update');
+Route::delete('/contacts/{contacts}', [DeleteController::class, 'destroy'])->name('contacts.destroy');
 
-Route::get('/contactos', [ContactController::class, 'index'])->name('contacts.index');;
-Route::get('/contactos/create', [CreateController::class, 'create'])->name('contacts.create');
-Route::post('/contactos', [ValidateController::class, 'store'])->name('contacts.store');
-Route::get('/contactos/{contactos}/edit', [EditController::class, 'edit'])->name('contacts.edit');
-Route::put('/contactos/{contactos}', [UpdateController::class, 'update'])->name('contacts.update');
-Route::delete('/contactos/{contactos}', [DeleteController::class, 'destroy'])->name('contacts.destroy');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

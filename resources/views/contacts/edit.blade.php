@@ -26,8 +26,11 @@
     </div>
 
     <div class="form-group">
-        <!-- Otros campos del formulario -->
+        <label for="phone">Teléfono:</label>
+        <input type="text" id="phone" name="phone" value="{{ $contact->phone }}" required>
     </div>
+
+    <button type="submit">Guardar</button>
 </form>
 </body>
 </html>
